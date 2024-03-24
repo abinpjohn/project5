@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+       <h2>Registration Form</h2>
+<form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+ {% csrf_token %}
+    <label>Username :</label>
+    <input type="text" name="username" placeholder="Enter your username"><br>
+    <label>Firstname :</label>
+     <input type="text" name="first_name" placeholder="Enter your Firstname"><br>
+    <label>Lastname :</label>
+     <input type="text" name="last_name" placeholder="Enter your Lastname"><br>
+    <label>EmailID :</label>
+     <input type="email" name="email" placeholder="Enter your emailid"><br>
+    <label>Password :</label>
+     <input type="password" name="password" placeholder="Enter your Password"><br>
+    <label>Confirm Password :</label>
+     <input type="password" name="password1" placeholder="Confirm password"><br>
+     <input type="submit">
+</form>
+  </div>
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+{% endblock %}

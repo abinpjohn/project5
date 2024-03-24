@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Movie List</h2>
+
+    <!-- Search form -->
+<!--    <form class="form-inline mt-3" method="GET" action="{% url 'movie_list' %}">-->
+<!--        <div class="input-group">-->
+<!--            <input type="text" class="form-control" placeholder="Search Movies" aria-label="Search" name="q" value="{{ query }}">-->
+<!--            <div class="input-group-append">-->
+<!--                <button class="btn btn-outline-secondary" type="submit">Search</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+
+    <!-- Category dropdown -->
+    <form class="form-inline mt-3" method="GET" action="{% url 'movie_list' %}">
+        <div class="input-group">
+            <select class="custom-select mr-sm-2" id="categorySelect" name="category">
+                <option value="" selected>Choose category...</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+
+    <!-- Movie list -->
+    <div class="row">
+        {% for movie in movies %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img class="card-img-top" src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <!-- Add other movie details as needed -->
+                        <a href="{% url 'movie_details' movie.id %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
